@@ -10,7 +10,7 @@ class Mora:
         pass
 
     @classmethod
-    def parse_to_json(cls):
+    def get(cls):
         headers = cls.headers
         url = 'http://mora.jp/special/anime/'
         res = requests.get(url,headers=headers)
@@ -52,6 +52,6 @@ class Mora:
             
 
 if __name__ == "__main__":
-    res = Mora.parse_to_json()
+    res = Mora.get()
     with open('songs.json','w',encoding='utf8') as f:
         f.write(json.dumps(res,ensure_ascii=False))
