@@ -42,14 +42,27 @@ class Mora:
             for name,item in divs.items():
                 song_list = []
                 for song in item:
-                    song_type = song.xpath('.//div/span/text()')[0]
-                    song_title = song.xpath('.//div/p[@class="partsATitle"]/text()')[0]
-                    song_artist = song.xpath('.//div/p[@class="partsAArtist"]/text()')[0]
-                    song_list.append({'title':song_title,'type':song_type,'artist':song_artist})
+                    song_type = song.xpath('.//div/span/text()')
+                    song_title = song.xpath('.//div/p[@class="partsATitle"]/text()')
+                    song_artist = song.xpath('.//div/p[@class="partsAArtist"]/text()')
+                    itemResult = {}
+                    if len(song_type) != 0:
+                        itemResult['type'] = song_type[0]
+                    else:
+                        itemResult['type'] = ''
+                    if len(song_title) != 0:
+                        itemResult['title'] = song_title[0]
+                    else:
+                        itemResult['title'] = ''
+                    if len(song_artist) != 0:
+                        itemResult['artist'] = song_artist[0]
+                    else:
+                        itemResult['artist'] = ''
+                    song_list.append(itemResult)
                 result[name] = song_list
         
         return result
-            
+
 
 if __name__ == "__main__":
     res = Mora.get()
